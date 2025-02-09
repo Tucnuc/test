@@ -1,6 +1,6 @@
 # Rostliny
 
-### GitHub Pages: https://tucnuc.github.io/rostliny/
+### GitHub Pages: https://tucnuc.github.io/Rostliny/home
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.2.
 
