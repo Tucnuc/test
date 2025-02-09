@@ -10,8 +10,8 @@ export const routes: Routes = [
     { path: '**', redirectTo: '/home' }
 ];
 
-@NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//     imports: [RouterModule.forRoot(routes)],
+//     exports: [RouterModule]
+// })
+// export class AppRoutingModule { }

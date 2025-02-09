@@ -183,15 +183,12 @@ export class TestPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shared.data$.subscribe(data => {
-      this.families = data
-      console.log('Načteno')
-    });
-    this.chosenFamilies = ["Miříkovité"];
-
-    if (!this.families || Object.keys(this.families).length === 0) {
-      console.error('Families data is null or empty');
-      return;
+    this.families = this.shared.getFamilies();
+    const storedChosenFamilies = localStorage.getItem('chosenFamilies');
+    if (storedChosenFamilies) {
+      this.chosenFamilies = JSON.parse(storedChosenFamilies);
+    } else {
+      console.error('No chosen families found in localStorage');
     }
   
     if (!this.chosenFamilies || this.chosenFamilies.length === 0) {
