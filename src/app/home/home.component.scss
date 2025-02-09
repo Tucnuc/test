@@ -1,0 +1,47 @@
+.con {
+    width: 100%;
+    height: calc(100% + 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    height: 100px;
+    width: 200px;
+    background-color: antiquewhite;
+    border-radius: 10px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: xx-large;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    z-index: 5;
+}
+
+.test {
+    position: absolute;
+    background-color: #111111;
+    height: 700px;
+    width: 1000px;
+    box-shadow: black 0px 5px 15px 1px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#testBtn {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+}
+
+#familyForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+}

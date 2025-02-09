@@ -1,0 +1,58 @@
+$color-1-dark: #111111;
+$color-1: #1e1e1e;
+$color-1-light: #3c3c3c;
+
+header {
+    height: 50px;
+    width: 100%;
+    background-color: $color-1-dark;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    padding-block: 20px;
+    justify-content: space-between;
+    box-shadow: black 0px 5px 15px;
+}
+
+h1 {
+    font-size: xxx-large;
+    margin: 0;
+}
+
+.button {
+    width: 150px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5px;
+    background-color: $color-1-light;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h1, .button-container {
+    margin-inline: 50px;
+}
+
+svg {
+    fill: white;
+    height: 30px;
+    width: 30px;
+}
+
+.home svg {
+    height: 31px;
+    width: 31px;
+}
+
+p {
+    font-weight: 500;
+    font-size: 22px;
+}

@@ -1,0 +1,59 @@
+<div class="con3">
+    <svg (click)="swapCards(true)" style="width: 75px;" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState3" class="btn-svg correct-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg (click)="swapCards(false)" style="width: 75px;" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState4" class="btn-svg incorrect-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+</div>
+<div class="con2">
+    <div id="flashcard" class="container">
+        @if (chosenPlant) {
+            <div class="swiper">
+                <img *ngFor="let img of chosenPlant.img; let i = index" [src]="img" class="slides"
+                 [ngStyle]="{'visibility': slideIndex === i + 1 ? 'visible' : 'hidden'}"
+                 [ngClass]="{'active': slideIndex === i + 1}"
+                 loading="lazy" draggable="false">
+            </div>
+            <div class="sub-container">
+                <div class="text" (click)="uncoverText()" [@blurAnimation]="isVisible ? 'unblurred' : 'blurred'">
+                    <p class="name">{{ chosenPlant.name }}</p>
+                    <p class="family">{{ chosenPlant.family }}</p>
+                </div>
+            </div>
+
+            <div class="arrow-con">
+                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{'black': chosenPlant.colors[slideIndex-1]}" class="arrow-right" (click)="changePicture(1)" height="24px" viewBox="300 -849 350 800" width="12px"><path d="m351-110-41-41 299-299-299-299 41-41 340 340L351-110Z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{'black': chosenPlant.colors[slideIndex-1]}" class="arrow-left" (click)="changePicture(-1)" height="24px" viewBox="300 -849 350 800" width="12px"><path d="m351-110-41-41 299-299-299-299 41-41 340 340L351-110Z"/></svg>    
+            </div>
+        }
+    </div>
+    <div id="animation-card-container"
+    [ngStyle]="{'display': isChanging ? 'flex' : 'none'}"
+    [ngClass]="{'correct': isCorrect}"
+    [ngClass]="{'incorrect': isIncorrect}"
+    [@cardSwap]="cardSwapState">
+    <svg [@opacityTransition]="opacityState1" class="circle-svg correct-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z"/></svg>
+    <svg [@opacityTransition]="opacityState2" class="circle-svg incorrect-circle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path d="M4 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-1.5 1.78l1.5 1.5 1.5-1.5.72.72-1.5 1.5 1.5 1.5-.72.72-1.5-1.5-1.5 1.5-.72-.72 1.5-1.5-1.5-1.5.72-.72z" /></svg>
+        <div id="flashcard" class="container animation-card" [@blurAnimation2]="blurCardState">
+            @if (chosenPlantCopy) {
+                <div class="swiper">
+                    <img *ngFor="let img of chosenPlantCopy.img; let i = index" [src]="img" class="slides"
+                    [ngStyle]="{'visibility': slideIndexCopy === i + 1 ? 'visible' : 'hidden'}"
+                    [ngClass]="{'active': slideIndexCopy === i + 1}"
+                    loading="lazy" draggable="false">
+                </div>
+                <div class="sub-container">
+                    <div class="text" [ngStyle]="{'filter': isVisibleCopy ? 'blur(0)' : 'blur(10px)'}">
+                        <p class="name">{{ chosenPlantCopy.name }}</p>
+                        <p class="family">{{ chosenPlantCopy.family }}</p>
+                    </div>
+                </div>
+
+                <div class="arrow-con">
+                    <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{'black': chosenPlantCopy.colors[slideIndexCopy-1]}" class="arrow-right" (click)="changePicture(1)" height="24px" viewBox="300 -849 350 800" width="12px"><path d="m351-110-41-41 299-299-299-299 41-41 340 340L351-110Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" [ngClass]="{'black': chosenPlantCopy.colors[slideIndexCopy-1]}" class="arrow-left" (click)="changePicture(-1)" height="24px" viewBox="300 -849 350 800" width="12px"><path d="m351-110-41-41 299-299-299-299 41-41 340 340L351-110Z"/></svg>    
+                </div>
+            }
+        </div>
+    </div>
+    <div id="first" class="container sub-card"></div>
+    <div id="second" class="container sub-card"></div>
+    <div id="third" class="container sub-card"></div>
+</div>

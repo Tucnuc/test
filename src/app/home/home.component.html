@@ -1,0 +1,14 @@
+<div class="con">
+    <!-- <div class="button" (click)="toggleExpandCollapse()">START</div> -->
+    <div class="test" [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'"></div>
+    <div class="test">
+        <form id="familyForm" [formGroup]="myForm">
+            <div formArrayName="families">
+                @for (family of familiesForm.controls; track $index) {
+                    <mat-checkbox [formControlName]="$index">{{ familiesKeys[$index] }}</mat-checkbox>
+                }
+            </div>
+            <button (click)="choosingComplete()">Dokončit</button>
+        </form>
+    </div>
+</div>
