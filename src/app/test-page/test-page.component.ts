@@ -1,6 +1,7 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgStyle, NgClass, NgFor } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { NgStyle, NgClass, NgFor, isPlatformBrowser } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Router } from '@angular/router';
 import { SharedService } from '../shared/shared.service';
 
 export interface Plant {
@@ -39,6 +40,11 @@ export interface Families {
       transition('invis <=> vis', [animate('250ms ease-in-out')]),
       transition('invis2 <=> vis2', [animate('250ms ease-in-out')]),
     ]),
+    trigger('opacityTransitionLong', [
+      state('vis', style({ opacity: 1  })),
+      state('invis', style({ opacity: 0 })),
+      transition('invis <=> vis', [animate('500ms ease-in-out')]),
+    ]),
     trigger('cardSwap', [
       state('static', style({ opacity: 1 })),
       state('movingRight', style({ transform: 'translate(200px, 0) rotate(5deg)' })),
@@ -53,7 +59,7 @@ export interface Families {
   ],
 })
 export class TestPageComponent implements OnInit {
-  constructor(private shared:SharedService) { }
+  constructor(private shared:SharedService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
   
   families: Families = {};
 
@@ -64,15 +70,21 @@ export class TestPageComponent implements OnInit {
   chosenFamilies: string[] = [];
   filteredPlants: Plant[] = [];
 
+  correctPlants: any[] = [];
+  incorrectPlants: any[] = [];
+
   usedPlants: string[] = [];
   chosenPlant: Plant | null = null;
   chosenPlantCopy: Plant | null = null;
+
+  lastPlant: boolean = false;
+  finished: boolean = false;
 
   generatePlant() {
     let i: number;
     let foundPlant: boolean = false;
 
-    while (!foundPlant) {
+    while (!foundPlant && this.usedPlants.length < this.filteredPlants.length) {
       i = this.getRandomNumber(0, this.filteredPlants.length-1);
       const generatedPlant = this.filteredPlants[i];
 
@@ -84,6 +96,14 @@ export class TestPageComponent implements OnInit {
       } else {
         console.log('Retrying..');
       }
+    }
+
+    if (this.lastPlant) {
+      this.finished = true;
+      this.chosenPlant = null;
+      console.log('All plants have been used. Finished.');
+    } else if (this.usedPlants.length === this.filteredPlants.length) {
+      this.lastPlant = true;
     }
   }
 
@@ -119,9 +139,18 @@ export class TestPageComponent implements OnInit {
   opacityState4: string = 'vis2';
   blurCardState: string = 'unblurred';
 
+  opacityState5: string = 'vis';
+  opacityState6: string = 'vis';
+  opacityState7: string = 'vis';
+  opacityState8: string = 'vis';
+
   cursorValue: string = 'pointer';
 
   swapCards(n: boolean) {
+    n ? this.correctPlants.push(this.chosenPlant) : this.incorrectPlants.push(this.chosenPlant);
+
+    if (this.finished) console.log("Hotovo");
+
     this.isVisibleCopy = this.isVisible;
     this.slideIndexCopy = this.slideIndex;
     this.chosenPlantCopy = JSON.parse(JSON.stringify(this.chosenPlant));
@@ -153,17 +182,29 @@ export class TestPageComponent implements OnInit {
         this.cardSwapState = 'movingRight';
         setTimeout(() => {
           this.cardSwapState = 'finishRight';
+
           setTimeout(() => {
-            this.resetStuff();
+            if (this.finished) {
+              this.finishedLearning();
+            } else {
+              this.resetStuff();
+            }
           }, 500);
+
         }, 750);
       } else {
         this.cardSwapState = 'movingLeft';
         setTimeout(() => {
           this.cardSwapState = 'finishLeft';
+
           setTimeout(() => {
-            this.resetStuff();
+            if (this.finished) {
+              this.finishedLearning();
+            } else {
+              this.resetStuff();
+            }
           }, 500);
+
         }, 750);
       }
     }, 900);
@@ -182,33 +223,50 @@ export class TestPageComponent implements OnInit {
     this.cursorValue = 'pointer';
   }
 
+  finishedLearning() {
+    this.opacityState8 = 'invis';
+    setTimeout(() => {
+      this.opacityState7 = 'invis';
+    }, 300);
+    setTimeout(() => {
+      this.opacityState6 = 'invis'
+    }, 600);
+    setTimeout(() => {
+      this.opacityState5 = 'invis'
+    }, 900);
+
+    const results = [this.correctPlants, this.incorrectPlants];
+    this.shared.setResults(results);
+
+    setTimeout(() => {
+      this.router.navigate(['/results']);
+    }, 1500);
+  }
+
   ngOnInit() {
-    this.families = this.shared.getFamilies();
-    const storedChosenFamilies = localStorage.getItem('chosenFamilies');
-    if (storedChosenFamilies) {
-      this.chosenFamilies = JSON.parse(storedChosenFamilies);
-    } else {
-      console.error('No chosen families found in localStorage');
-    }
-  
-    if (!this.chosenFamilies || this.chosenFamilies.length === 0) {
-      console.error('Chosen families data is null or empty');
-      return;
-    }
-
-    const familiesKeys = Object.keys(this.families);
-    for (let i = 0; i < familiesKeys.length; i++) {
-      if (this.chosenFamilies.includes(familiesKeys[i])) {
-        this.filteredPlants.push(...this.families[familiesKeys[i]]);
+    if (isPlatformBrowser(this.platformId)) {
+      this.families = this.shared.getFamilies();
+      const storedChosenFamilies = localStorage.getItem('chosenFamilies');
+      if (storedChosenFamilies) {
+        this.chosenFamilies = JSON.parse(storedChosenFamilies);
+      } else {
+        console.error('No chosen families found in localStorage');
       }
-    }
 
-    console.log(`Plants were succesfully filtered. Their number: ${this.filteredPlants.length}`);
-    if (this.filteredPlants.length > 0) {
-      this.generatePlant();
-      this.showSlide(this.slideIndex);
-    } else {
-      console.error('No plants were filtered');
+      const familiesKeys = Object.keys(this.families);
+      for (let i = 0; i < familiesKeys.length; i++) {
+        if (this.chosenFamilies.includes(familiesKeys[i])) {
+          this.filteredPlants.push(...this.families[familiesKeys[i]]);
+        }
+      }
+
+      console.log(`Plants were successfully filtered. Their number: ${this.filteredPlants.length}`);
+      if (this.filteredPlants.length > 0) {
+        this.generatePlant();
+        this.showSlide(this.slideIndex);
+      } else {
+        console.error('No plants were filtered');
+      }
     }
   }
 }

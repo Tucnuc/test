@@ -34,4 +34,12 @@ export class SharedService {
   getFamilies() {
     return this.families;
   }
+
+  results: any[] = []
+  setResults(data: any[]) {
+    this.results = data;
+  }
+  getResults() {
+    return this.results;
+  }
 }
