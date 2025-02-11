@@ -1,1 +1,15 @@
-<p>results-page works!</p>
+<div class="con">
+    <div class="resultsCon" [@expandCollapse]="conAnimState">
+        <div class="percentageCon">
+            <p class="text heading">{{ headingText }}</p>
+            <div class="bar" [@fading]="fadeState2">
+                <div class="markerCon">
+                    @for (marker of markers; track $index) {
+                        <div class="marker" [@fading]="markerStates[$index]" [ngStyle]="{'left': marker + '%'}"><p class="markerText">{{ $index+1 }}</p></div>
+                    }
+                </div>
+                <div class="per" [@fill]="fillAnimState" [attr.per]="percentageText + '%'" [ngStyle]="{'max-width': percentage + '%'}"></div>
+            </div>
+        </div>
+    </div>
+</div>

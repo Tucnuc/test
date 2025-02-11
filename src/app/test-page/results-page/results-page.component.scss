@@ -1,5 +1,107 @@
-p {
+$color-1-dark: #111111;
+$color-1: #1e1e1e;
+$color-1-light: #3c3c3c;
+$green: #007300;
+
+.con {
+    width: 100%;
+    height: calc(100% + 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.resultsCon {
     position: absolute;
-    font-size: larger;
-    z-index: 999;
+    background-color: $color-1-dark;
+    height: 700px;
+    width: 500px;
+    box-shadow: black 0px 5px 15px 1px;
+    border: $color-1 2px solid;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.percentageCon {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+}
+
+.bar {
+    height: 35px;
+    width: 375px;
+    background-color: $color-1;
+    border-radius: 7.5px;
+}
+
+.per {
+    background-color: $green;
+    height: 100%;
+    border-radius: 7.5px;
+    position: relative;
+}
+
+.per::before {
+    content: attr(per);
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    background-color: $color-1-light;
+    font-weight: 500;
+    top: -47.5px;
+    height: 35px;
+    width: 60px;
+    border-radius: 7.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(50%);
+}
+.per::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: $color-1-light;
+    top: -17.5px;
+    right: 0;
+    transform: translateX(50%) rotate(45deg);
+    border-radius: 2px;
+}
+
+.markerCon {
+    position: absolute;
+    height: 35px;
+    width: 375px;
+    display: flex;
+    align-items: center;
+}
+
+.marker {
+    position: absolute;
+    width: 2px;
+    height: 39px;
+    background-color: white;
+    z-index: 1;
+    border-radius: 100vw;
+}
+
+.markerText {
+    position: absolute;
+    bottom: -30px;
+    left: -140%;
+}
+
+.text {
+    font-size: 30px;
+}
+
+.heading {
+    font-size: 40px;
+    margin-bottom: 75px;
 }
