@@ -54,7 +54,7 @@ export class ResultsPageComponent implements OnInit {
   percentageText = 0;
   conAnimState = 'collapsed';
   fillAnimState = 'empty';
-  markers = [85, 75, 65, 50, 35];
+  markers = [85, 75, 60, 40];
 
   fadeState1 = 'disappear';
   fadeState2 = 'disappear';
