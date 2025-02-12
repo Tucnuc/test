@@ -20,7 +20,8 @@ $green: #007300;
     border: $color-1 2px solid;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .percentageCon {
@@ -30,6 +31,7 @@ $green: #007300;
     flex-direction: column;
     height: 300px;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 .bar {
@@ -98,10 +100,43 @@ $green: #007300;
 }
 
 .text {
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .heading {
     font-size: 40px;
     margin-bottom: 75px;
+}
+
+.familyResults {
+    gap: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.familyCon {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.familyCon .per::before {
+    font-size: 15px;
+    top: -38px;
+    height: 27.5px;
+    width: 50px;
+}
+.familyCon .per::after {
+    width: 7.5px;
+    height: 7.5px;
+    top: -15px;
+    border-radius: 1px;
+}
+
+.familyCon .bar {
+    height: 30px;
+    width: 200px;
+    border-radius: 6px;
+}
+.familyCon .per {
+    border-radius: 6px;
 }

@@ -11,5 +11,15 @@
                 <div class="per" [@fill]="fillAnimState" [attr.per]="percentageText + '%'" [ngStyle]="{'max-width': percentage + '%'}"></div>
             </div>
         </div>
+        <div class="familyResults">
+            @for (family of chosenFamilies; track $index) {
+                <div class="familyCon">
+                    <p class="text">{{ familiesTexts[$index] }}</p>
+                    <div class="bar" [@fading]="familiesFadeStates[$index]">
+                        <div class="per" [@fill]="familiesFillStates[$index]" [attr.per]="familiesPerTexts[$index] + '%'" [ngStyle]="{'max-width': familiesPercentages[$index] + '%'}"></div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
