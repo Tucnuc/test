@@ -179,22 +179,21 @@ export class ResultsPageComponent implements OnInit {
 
       setTimeout(() => {
 
-        for (let i = 0; i < this.chosenFamilies.length; i++) {
+        this.chosenFamilies.forEach((family, index) => {
           setTimeout(() => {
             let y = 0;
-            const txt = familiesKeys[i];
             const speed = 40;
     
             const typeWriter = () => {
-              if (y < txt.length) {
-                this.familiesTexts[i] += txt.charAt(y);
+              if (y < family.length) {
+                this.familiesTexts[index] += family.charAt(y);
                 y++;
                 setTimeout(typeWriter, speed);
               }
             };
             typeWriter();
-          }, 150 * i);
-        }
+          }, 150 * index);
+        });
 
         setTimeout(() => {
           for (let i = 0; i < this.chosenFamilies.length; i++) {
