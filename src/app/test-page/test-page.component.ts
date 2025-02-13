@@ -80,6 +80,10 @@ export class TestPageComponent implements OnInit {
   lastPlant: boolean = false;
   finished: boolean = false;
 
+  currentNumber: number = 1;
+  maxNumber: number = 0;
+  counter: string = ``;
+
   generatePlant() {
     let i: number;
     let foundPlant: boolean = false;
@@ -143,13 +147,12 @@ export class TestPageComponent implements OnInit {
   opacityState6: string = 'vis';
   opacityState7: string = 'vis';
   opacityState8: string = 'vis';
+  opacityState9: string = 'vis';
 
   cursorValue: string = 'pointer';
 
   swapCards(n: boolean) {
     n ? this.correctPlants.push(this.chosenPlant) : this.incorrectPlants.push(this.chosenPlant);
-
-    if (this.finished) console.log("Hotovo");
 
     this.isVisibleCopy = this.isVisible;
     this.slideIndexCopy = this.slideIndex;
@@ -188,6 +191,8 @@ export class TestPageComponent implements OnInit {
               this.finishedLearning();
             } else {
               this.resetStuff();
+              this.currentNumber++;
+              this.counter = `${this.currentNumber}/${this.maxNumber}`;
             }
           }, 500);
 
@@ -225,6 +230,7 @@ export class TestPageComponent implements OnInit {
 
   finishedLearning() {
     this.opacityState8 = 'invis';
+    this.opacityState9 = 'invis';
     setTimeout(() => {
       this.opacityState7 = 'invis';
     }, 300);
@@ -260,6 +266,8 @@ export class TestPageComponent implements OnInit {
         }
       }
 
+      this.maxNumber = this.filteredPlants.length;
+      this.counter = `${this.currentNumber}/${this.maxNumber}`;
       console.log(`Plants were successfully filtered. Their number: ${this.filteredPlants.length}`);
       if (this.filteredPlants.length > 0) {
         this.generatePlant();

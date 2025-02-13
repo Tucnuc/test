@@ -214,3 +214,16 @@ $red: #b20000;
 .incorrect-btn {
     transform: rotate(180deg);
 }
+
+.counter {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    height: 50px;
+    width: 80px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
