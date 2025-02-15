@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
-import { NgStyle, NgClass, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { NgStyle, isPlatformBrowser } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { SharedService } from '../../shared/shared.service';
 
@@ -38,39 +38,47 @@ export interface Families {
   ],
 })
 export class ResultsPageComponent implements OnInit {
-  constructor(private shared: SharedService, private cdr: ChangeDetectorRef, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private shared: SharedService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   families: Families = {};
   chosenFamilies: string[] = [];
-  correctPlants: any[] = [];
-  incorrectPlants: any[] = [];
+  correctPlants: Plant[] = [];
+  incorrectPlants: Plant[] = [];
+  incorrectFamilies: string[] = [];
 
   calculatePercentage(part: number, total: number): number {
     if (total === 0) return 0;
     return parseFloat(((part / total) * 100).toFixed(0));
   }
 
-  typeWriter(txt: string, speed: number) {
+  typeWriter(txt: string) {
     let i = 0;
-    const type = () => {
+    const speed = 40;
+    const typeWriter = () => {
       if (i < txt.length) {
         this.headingText += txt.charAt(i);
         i++;
-        setTimeout(type.bind(this), speed);
+        setTimeout(typeWriter, speed);
       }
     };
-    type();
+    typeWriter();
   }
 
-  percentage = 0;
-  percentageText = 0;
-  conAnimState = 'collapsed';
-  fillAnimState = 'empty';
-  markers = [85, 75, 60, 40];
+  getFilteredPlants(family: string): Plant[] {
+    return this.incorrectPlants.filter(plant => plant.family === family);
+  }
 
-  fadeState1 = 'disappear';
-  fadeState2 = 'disappear';
-  markerStates = ['disappear','disappear','disappear','disappear','disappear'];
+  percentage: number = 0;
+  percentageText: number = 0;
+  conAnimState: string = 'collapsed';
+  con3AnimState: string = 'collapsed';
+  fillAnimState: string = 'empty';
+  markers: number[] = [85, 75, 60, 40];
+
+  fadeState1: string = 'disappear';
+  fadeState2: string = 'disappear';
+  fadeState3: string = 'appear';
+  markerStates: string[] = ['disappear','disappear','disappear','disappear','disappear'];
   headingText: string = '';
 
   familiesTexts: string[] = [];
@@ -79,8 +87,68 @@ export class ResultsPageComponent implements OnInit {
   familiesTypeVariables: string[] = [];
   familiesPercentages: number[] = [];
   familiesPerTexts: number[] = [];
-  
+  familiesTextsFadeStates: string[] = [];
 
+  switchBtnState: string = 'disappear';
+  isFinished: boolean = false;
+  hidden: boolean = true;
+  incorrectFamiliesTexts: string[] = [];
+  incorrectPlantsFadeStates: string[] = [];
+
+  nextResults() {
+    this.switchBtnState = 'disappear';
+    setTimeout(() => {
+      this.fadeState3 = 'disappear';
+    }, 150);
+    setTimeout(() => {
+      this.isFinished = false;
+    }, 525);
+
+    setTimeout(() => {
+      this.conAnimState = 'collapsed';
+      setTimeout(() => {
+        this.hidden = false;
+        this.headingText = '';
+        this.conAnimState = 'expanded';
+
+        setTimeout(() => {
+          this.typeWriter('Nevěděli jste:');
+          this.fadeState3 = 'appear';
+
+          setTimeout(() => {
+            this.incorrectFamilies.forEach((family, index) => {
+              setTimeout(() => {
+                let i = 0;
+                const speed = 40;
+                const typeWriter = () => {
+                  if (i < family.length) {
+                    this.incorrectFamiliesTexts[index] += family.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                  }
+                };
+              typeWriter();
+              }, 150 * index);
+            });
+            
+            setTimeout(() => {
+              for (let i = 0; i < this.incorrectPlantsFadeStates.length; i++) {
+                setTimeout(() => {
+                  this.incorrectPlantsFadeStates[i] = 'appear';
+                }, 150 * i);
+              }
+            }, 200);
+          }, 800);
+
+        }, 1500);
+
+
+      }, 1200);
+    }, 750);
+  }
+
+
+  
   ngOnInit(): void {
     this.families = this.shared.getFamilies();
     const familiesKeys = Object.keys(this.families);
@@ -99,22 +167,24 @@ export class ResultsPageComponent implements OnInit {
     
     this.correctPlants = results[resultsKeys[0]];
     this.incorrectPlants = results[resultsKeys[1]];
-    // this.correctPlants = [
-    //   { name: 'Mrkev Obecná', family: 'Miříkovité', img: ['images/rostliny/mirikovite/mrkev-obecna/mrkev1.webp','images/rostliny/mirikovite/mrkev-obecna/mrkev2.webp','images/rostliny/mirikovite/mrkev-obecna/mrkev3.webp'], colors: [false, false, true] },
-    //   { name: 'Miřík Celer', family: 'Miříkovité', img: ['images/rostliny/mirikovite/mirik-celer/celer1.webp','images/rostliny/mirikovite/mirik-celer/celer2.webp','images/rostliny/mirikovite/mirik-celer/celer3.webp'], colors: [false, false, false] },
-    //   { name: 'Jeřáb', family: 'Růžovité', img: ['images/rostliny/ruzovite/jerab/jerab1.webp','images/rostliny/ruzovite/jerab/jerab2.webp','images/rostliny/ruzovite/jerab/jerab3.webp','images/rostliny/ruzovite/jerab/jerab4.webp'], colors: [true, false, false, false] },
-    // ];
-    // this.incorrectPlants = [
-    //   { name: 'Jabloň', family: 'Růžovité', img: ['images/rostliny/ruzovite/jablon/jablon1.webp','images/rostliny/ruzovite/jablon/jablon2.webp','images/rostliny/ruzovite/jablon/jablon3.webp'], colors: [false, false, true] },
-    //   { name: 'Hrušeň', family: 'Růžovité', img: ['images/rostliny/ruzovite/hrusen/hrusen1.webp','images/rostliny/ruzovite/hrusen/hrusen2.webp','images/rostliny/ruzovite/hrusen/hrusen3.webp','images/rostliny/ruzovite/hrusen/hrusen4.webp'], colors: [false, false, true, false] },
-    //   { name: 'Petržel Obecná', family: 'Miříkovité', img: ['images/rostliny/mirikovite/petrzel-obecna/petrzel1.webp','images/rostliny/mirikovite/petrzel-obecna/petrzel2.webp','images/rostliny/mirikovite/petrzel-obecna/petrzel3.webp'], colors: [false, false, false] },
-    // ];
 
     if (this.correctPlants || this.incorrectPlants) {
       this.percentage = this.calculatePercentage(this.correctPlants.length, this.correctPlants.length + this.incorrectPlants.length);
       console.log(this.percentage);
 
-      // let i: number = 0;
+      this.chosenFamilies.forEach(family => {
+        this.incorrectPlants.forEach(plant => {
+          if (plant.family === family && !this.incorrectFamilies.includes(plant.family)) {
+            this.incorrectFamilies.push(plant.family);
+            this.incorrectFamiliesTexts.push('');
+          }
+        });
+      });
+
+      for (let i = 0; i < this.incorrectPlants.length; i++) {
+        this.incorrectPlantsFadeStates.push('disappear');
+      }
+
       this.chosenFamilies.forEach(family => {
         const indexOfFamily = familiesKeys.indexOf(family);
         const numberOfPlants = this.families[familiesKeys[indexOfFamily]].length
@@ -124,6 +194,7 @@ export class ResultsPageComponent implements OnInit {
         this.familiesPercentages.push(percentage);
 
         this.familiesFadeStates.push('disappear');
+        this.familiesTextsFadeStates.push('appear');
         this.familiesFillStates.push('empty');
         this.familiesPerTexts.push(0);
         this.familiesTexts.push('');
@@ -137,18 +208,7 @@ export class ResultsPageComponent implements OnInit {
       this.conAnimState = 'expanded';
       setTimeout(() => {
 
-        let i = 0;
-        const txt = 'Celkové hodnocení';
-        const speed = 40;
-
-        const typeWriter = () => {
-          if (i < txt.length) {
-            this.headingText += txt.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-          }
-        };
-        typeWriter();
+        this.typeWriter('Celkové hodnocení')
 
         setTimeout(() => {
           this.fadeState2 = 'appear';
@@ -218,20 +278,14 @@ export class ResultsPageComponent implements OnInit {
               this.familiesFillStates[i] = 'filled';
             }, 150 * i);
           }
+
+          setTimeout(() => {
+            if (this.percentage < 100) {
+              this.isFinished = true;
+              this.switchBtnState = 'appear';
+            }
+          }, 600 * Math.sqrt(this.chosenFamilies.length));
         }, 1500);
-
-        // let i = 0;
-        // const txt = 'Podle čeledí';
-        // const speed = 40;
-
-        // const typeWriter = (txt: string) => {
-        //   if (i < txt.length) {
-        //     this.headingText += txt.charAt(i);
-        //     i++;
-        //     setTimeout(typeWriter, speed);
-        //   }
-        // };
-        // typeWriter(txt);
       }, 4000);
     }, 400);
   }

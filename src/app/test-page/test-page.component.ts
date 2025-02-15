@@ -207,6 +207,8 @@ export class TestPageComponent implements OnInit {
               this.finishedLearning();
             } else {
               this.resetStuff();
+              this.currentNumber++;
+              this.counter = `${this.currentNumber}/${this.maxNumber}`;
             }
           }, 500);
 

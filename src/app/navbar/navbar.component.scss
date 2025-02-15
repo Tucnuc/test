@@ -12,6 +12,7 @@ header {
     padding-block: 20px;
     justify-content: space-between;
     box-shadow: black 0px 5px 15px;
+    z-index: 10;
 }
 
 h1 {
@@ -55,4 +56,14 @@ svg {
 p {
     font-weight: 500;
     font-size: 22px;
+}
+.tba {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 1;
+    border-radius: 10px;
+    cursor: default;
 }

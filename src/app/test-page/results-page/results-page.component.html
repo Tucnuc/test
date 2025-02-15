@@ -1,6 +1,10 @@
+<div class="con2">
+    <svg style="width: 75px;" (click)="nextResults()" [ngStyle]="{'display': isFinished ? 'block' : 'none'}" [@fading]="switchBtnState" class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg style="width: 75px;" class="btn-svg placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+</div>
 <div class="con">
-    <div class="resultsCon" [@expandCollapse]="conAnimState">
-        <div class="percentageCon">
+    <div class="resultsCon" [@expandCollapse]="conAnimState" [ngStyle]="{'display': hidden ? 'flex' : 'none'}">
+        <div class="percentageCon" [@fading]="fadeState3">
             <p class="text heading">{{ headingText }}</p>
             <div class="bar" [@fading]="fadeState2">
                 <div class="markerCon">
@@ -11,12 +15,31 @@
                 <div class="per" [@fill]="fillAnimState" [attr.per]="percentageText + '%'" [ngStyle]="{'max-width': percentage + '%'}"></div>
             </div>
         </div>
-        <div class="familyResults">
+        <div class="familyResults" [@fading]="fadeState3">
             @for (family of chosenFamilies; track $index) {
                 <div class="familyCon">
-                    <p class="text">{{ familiesTexts[$index] }}</p>
+                    <p class="text" [@fading]="familiesTextsFadeStates[$index]">{{ familiesTexts[$index] }}</p>
                     <div class="bar" [@fading]="familiesFadeStates[$index]">
                         <div class="per" [@fill]="familiesFillStates[$index]" [attr.per]="familiesPerTexts[$index] + '%'" [ngStyle]="{'max-width': familiesPercentages[$index] + '%'}"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="incorrectPlantsCon" [@expandCollapse]="conAnimState" [ngStyle]="{'display': hidden ? 'none' : 'flex'}">
+        <p class="text heading2">{{ headingText }}</p>
+        <div class="plantsConCon" [@fading]="fadeState3">
+            @for (family of incorrectFamilies; track $index) {
+                <div class="plantsSubCon">
+                    <p class="subHeading">{{ incorrectFamiliesTexts[$index] }}</p>
+                    <div class="plantsCon">
+                        @for (plant of getFilteredPlants(family); track $index) {
+                            <div class="plantCon" [@fading]="incorrectPlantsFadeStates[$index]">
+                                <img class="plantImg" [src]="plant.img[0]">
+                                <p class="subtext">{{ plant.name }}</p>
+                            </div>
+                        }
                     </div>
                 </div>
             }
