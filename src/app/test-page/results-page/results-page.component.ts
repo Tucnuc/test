@@ -150,6 +150,7 @@ export class ResultsPageComponent implements OnInit {
 
   
   ngOnInit(): void {
+    this.shared.changeStatus();
     this.families = this.shared.getFamilies();
     const familiesKeys = Object.keys(this.families);
 

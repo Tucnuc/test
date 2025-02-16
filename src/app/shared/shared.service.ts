@@ -115,10 +115,10 @@ export class SharedService {
   }
 
   results: any[] = []
-  setResults(data: any[]) {
-    this.results = data;
-  }
-  getResults() {
-    return this.results;
-  }
+  setResults(data: any[]) { this.results = data }
+  getResults() { return this.results }
+
+  wasLoaded: boolean = false;
+  changeStatus() { this.wasLoaded = true }
+  getStatus() { return this.wasLoaded }
 }

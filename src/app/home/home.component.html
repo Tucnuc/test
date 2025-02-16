@@ -1,14 +1,34 @@
 <div class="con">
-    <!-- <div class="button" (click)="toggleExpandCollapse()">START</div> -->
-    <div class="test" [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'"></div>
-    <div class="test">
-        <form id="familyForm" [formGroup]="myForm">
+    <img class="background" [src]="backgrounds[0]"
+        [@zooming]="zoomState ? 'zoom' : 'unzoom'" [@backgroundFading]="fadeStates[0] ? 'appear' : 'disappear'">
+    <img class="background" [src]="backgrounds[1]"
+        [@zooming]="zoomState ? 'zoom' : 'unzoom'" [@backgroundFading]="fadeStates[1] ? 'appear' : 'disappear'">
+    <img class="background" [src]="backgrounds[2]"
+        [@zooming]="zoomState ? 'zoom' : 'unzoom'" [@backgroundFading]="fadeStates[2] ? 'appear' : 'disappear'">
+    <img class="background" [src]="backgrounds[3]"
+        [@zooming]="zoomState ? 'zoom' : 'unzoom'" [@backgroundFading]="fadeStates[3] ? 'appear' : 'disappear'">
+    <div class="backdrop" [@fading2]="backdropFadeState"></div>
+
+    <div class="button" (click)="readyToStart()" [ngStyle]="{'display': visible ? 'flex' : 'none'}" [@fading]="btnFade">START</div>
+    <div class="formCon" [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'">
+        <form id="familyForm" [formGroup]="myForm" [@fading]="fadeState">
+            <mat-checkbox [@fading]="checkFadeStates[0]"
+                [checked]="isAllSelected()"
+                [indeterminate]="isIndeterminate()"
+                (change)="toggleAll($event.checked)">
+                Všechny čeledě
+            </mat-checkbox>
+
             <div formArrayName="families">
-                @for (family of familiesForm.controls; track $index) {
-                    <mat-checkbox [formControlName]="$index">{{ familiesKeys[$index] }}</mat-checkbox>
-                }
+                <div class="checkboxes">
+                    @for (family of familiesForm.controls; track $index) {
+                        <mat-checkbox [@fading]="checkFadeStates[$index+2]" class="checkbox" [formControlName]="$index">{{ familiesKeys[$index] }}</mat-checkbox>
+                    }
+                </div>
             </div>
-            <button (click)="choosingComplete()">Dokončit</button>
+            <div>
+                <button mat-raised-button [@fading]="checkFadeStates[1]" (click)="choosingCompleted()">Dokončit</button>
+            </div>    
         </form>
     </div>
 </div>

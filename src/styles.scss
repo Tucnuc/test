@@ -32,6 +32,13 @@ html {
       selected-checkmark-color: black,
       disabled-selected-checkmark-color: black,
     ));
+
+    @include mat.button-overrides((
+      protected-container-color: rgba(255, 255, 255, 0.05),
+      protected-label-text-color: white,
+      protected-state-layer-color: white,
+      protected-ripple-color: rgba(255, 255, 255, 0.1),
+    ));
   }
 
 $color-1-dark: #111111;
@@ -53,4 +60,17 @@ body {
 
 p {
     margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $color-1-light;
+  border-radius: 100vw;
+  border: $color-1 1px solid;
+}
+::-webkit-scrollbar-track {
+  background-color: $color-1;
+  border-radius: 100vw;
 }

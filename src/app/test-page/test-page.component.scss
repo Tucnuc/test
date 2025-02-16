@@ -134,16 +134,6 @@ img {
     font-size: larger;
 }
 
-// .yesbtn {
-//     position: absolute;
-//     top: 0;
-//     left: 100px;
-// }
-// .nobtn {
-//     position: absolute;
-//     top: 0;
-// }
-
 .animation-card {
     position: absolute;
     z-index: 1;
@@ -219,7 +209,7 @@ $red: #b20000;
     position: absolute;
     bottom: 0;
     right: 0;
-    z-index: 10;
+    z-index: 12;
     height: 50px;
     width: 80px;
     font-size: 25px;

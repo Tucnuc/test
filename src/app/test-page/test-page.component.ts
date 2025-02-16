@@ -148,8 +148,10 @@ export class TestPageComponent implements OnInit {
   opacityState7: string = 'vis';
   opacityState8: string = 'vis';
   opacityState9: string = 'vis';
+  opaState: string = 'invis';
 
   cursorValue: string = 'pointer';
+  indexValue: number = 0;
 
   swapCards(n: boolean) {
     n ? this.correctPlants.push(this.chosenPlant) : this.incorrectPlants.push(this.chosenPlant);
@@ -252,6 +254,13 @@ export class TestPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.shared.changeStatus();
+
+    setTimeout(() => {
+      this.indexValue = 11;
+      this.opaState = 'vis';
+    }, 250);
+
     if (isPlatformBrowser(this.platformId)) {
       this.families = this.shared.getFamilies();
       const storedChosenFamilies = localStorage.getItem('chosenFamilies');
