@@ -377,6 +377,12 @@ $green: #007300;
     }
 }
 
+@media only screen and (max-height: 650px) {
+    .resultsCon {
+        height: 400px;
+    }
+}
+
 @media only screen and (max-width: 1000px) {
     .incorrectPlantsCon {
         width: 650px;
