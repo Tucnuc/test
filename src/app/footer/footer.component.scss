@@ -11,3 +11,9 @@ footer {
     box-shadow: black 0px -5px 15px;
     z-index: 10;
 }
+
+@media only screen and (max-height: 700px) {
+    footer {
+        height: 30px;
+    }
+}

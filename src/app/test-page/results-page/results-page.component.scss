@@ -238,3 +238,167 @@ $green: #007300;
     margin-block: 20px;
     margin-right: 20px;
 }
+
+.supportBtn {
+    display: none;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    z-index: 100;
+    border-radius: 10px;
+    position: absolute;
+    right: 50%;
+    transform: translate(50%);
+    margin-top: 12.5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-height: 900px), only screen and (max-width: 900px) {
+    .resultsCon {
+        height: 600px;
+        width: 400px;
+        margin-bottom: 7.5px;
+    }
+    .text {
+        font-size: 21px;
+    }
+    .heading, .heading2 {
+        font-size: 35px;
+        margin-bottom: 60px;
+    }
+    .bar, .markerCon {
+        width: 325px;
+    }
+
+    .per::before {
+        font-size: 15px;
+        top: -43px;
+        height: 27.5px;
+        width: 50px;
+    }
+    .per::after {
+        width: 7.5px;
+        height: 7.5px;
+        top: -20px;
+        border-radius: 1px;
+    }
+
+    .familyCon {
+        margin-left: 55px;
+        margin-right: 32.5px;
+    }
+    .familyResults {
+        gap: 40px;
+    }
+    .familyCon .per::before {
+        font-size: 12px;
+        top: -30.4px;
+        height: 22px;
+        width: 40px;
+    }
+    .familyCon .per::after {
+        width: 6px;
+        height: 6px;
+        top: -12px;
+        border-radius: 1px;
+    }
+    .familyCon .bar {
+        height: 25px;
+        width: 150px;
+        border-radius: 4px;
+    }
+    .familyCon .per {
+        border-radius: 4px;
+    }
+
+    .con2 {
+        gap: 475px;
+    }
+    .btn-svg {
+        width: 60px;
+    }
+}
+@media only screen and (max-height: 780px) {
+    .resultsCon {
+        height: 500px;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .resultsCon {
+        width: 350px;
+    }
+    .text {
+        font-size: 20px;
+    }
+    .heading, .heading2 {
+        font-size: 33px;
+    }
+
+    .bar, .markerCon {
+        width: 300px;
+    }
+    .familyCon {
+        margin-left: 45px;
+        margin-right: 22.5px;
+    }
+    .familyResults {
+        gap: 37.5px;
+    }
+    .familyCon .bar {
+        height: 22.5px;
+        width: 130px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .con2 {
+        gap: 200px;
+        align-items: flex-start;
+        height: 70px;
+        z-index: 10 !important;
+    }
+    .supportBtn {
+        display: block;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .btn-svg {
+        width: 30px;
+        margin-top: 15px;
+    }
+    .supportBtn {
+        height: 60px;
+    }
+}
+@media only screen and (max-width: 600px) and (max-height: 700px) {
+    .btn-svg {
+        width: 25px;
+        margin-top: 8px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .incorrectPlantsCon {
+        width: 650px;
+    }
+}
+@media only screen and (max-height: 900px) {
+    .incorrectPlantsCon {
+        height: 550px;
+        margin-bottom: 10px;
+    }
+    .heading2 {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .incorrectPlantsCon {
+        width: 320px;
+    }
+}
+@media only screen and (max-height: 740px) {
+    .incorrectPlantsCon {
+        height: 400px;
+    }
+}

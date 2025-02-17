@@ -196,7 +196,9 @@ export class HomeComponent implements OnInit {
   cycleDelay   = 250;
 
   cycleImages(): void {
-    this.zoomState = !this.zoomState;
+    if (this.shouldZoom()) {
+      this.zoomState = !this.zoomState;
+    }
     
     setTimeout(() => {
       const next = (this.activeImage + 1) % this.backgrounds.length;
@@ -214,6 +216,10 @@ export class HomeComponent implements OnInit {
       }, this.fadeDuration);
       
     }, this.zoomDuration);
+  }
+
+  shouldZoom(): boolean {
+    return window.innerWidth > 600;
   }
 
 }

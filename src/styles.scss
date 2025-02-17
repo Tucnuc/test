@@ -48,14 +48,14 @@ $color-1-light: #3c3c3c;
 html, body {
     height: 100%;
     width: 100%;
-    background-color: $color-1;
+    overflow: hidden;
 }
 
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: white;
-    overflow: hidden;
+    background-color: $color-1;
 }
 
 p {

@@ -1,8 +1,9 @@
+<div class="supportBtn" (click)="supportHomeBtn()"></div>
 <div class="con3" [ngStyle]="{ 'zIndex': indexValue-10 }" [@opacityTransitionLong]="opaState">
-    <svg (click)="swapCards(true)" style="width: 75px;" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState3" class="btn-svg correct-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
-    <svg (click)="swapCards(false)" style="width: 75px;" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState4" class="btn-svg incorrect-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg (click)="swapCards(true)" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState3" class="btn-svg correct-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg (click)="swapCards(false)" [ngStyle]="{ 'cursor': cursorValue }" [@opacityTransition]="opacityState4" class="btn-svg incorrect-btn" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
 </div>
-<div class="con2" [ngStyle]="{ 'zIndex': indexValue-10 }" [@opacityTransitionLong]="opaState">
+<div class="con2" [ngStyle]="{ 'zIndex': indexValue-9 }" [@opacityTransitionLong]="opaState">
     <div id="flashcard" class="container" [@opacityTransitionLong]="opacityState8">
         @if (chosenPlant) {
             <div class="swiper">

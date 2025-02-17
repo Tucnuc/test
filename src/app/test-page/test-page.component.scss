@@ -112,8 +112,8 @@ img {
 }
 
 .text {
-    width: 452px;
-    height: 132px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
     text-align: center;
     display: flex;
@@ -164,7 +164,6 @@ $red: #b20000;
     fill: $green;
     width: 257px;
 }
-
 .incorrect-circle {
     fill: $red;
     width: 250px;
@@ -220,4 +219,208 @@ $red: #b20000;
 
 .anim-sub-container .text {
     cursor: default;
+}
+
+
+@media only screen and (max-height: 800px), only screen and (max-width: 920px) {
+    .container {
+        height: 500px;
+        width: 400px;
+    }
+    #animation-card-container {
+        height: 500px;
+        width: 400px;
+    }
+    .correct-circle {
+        width: 205.6px;
+    }
+    .incorrect-circle {
+        width: 200px;
+    }
+
+    img {
+        width: 370px;
+        height: 330px;
+    }
+    .arrow-con {
+        width: 370px;
+        height: 330px;
+        margin-top: 10px;
+    }
+    .swiper {
+        width: 370px;
+        height: 330px;
+        margin-top: 10px;
+    }
+    .sub-container {
+        width: 370px;
+        height: 130px;
+    }
+    .name {
+        font-size: xx-large;
+    }
+    .family {
+        font-size: larger;
+    }
+    .arrow-right, .arrow-left {
+        width: 47px;
+        height: 58px;
+        margin-inline: 10px;
+    }
+    .btn-svg {
+        width: 55px;
+    }
+    .con3 {
+        gap: 475px;
+    }
+}
+@media only screen and (max-height: 740px), only screen and (max-width: 600px) {
+    .container {
+        height: 400px;
+        width: 300px;
+    }
+    #animation-card-container {
+        height: 400px;
+        width: 300px;
+    }
+    .correct-circle {
+        width: 154.2px;
+    }
+    .incorrect-circle {
+        width: 150px;
+    }
+
+    img {
+        width: 273.6px;
+        height: 264px;
+    }
+    .arrow-con {
+        width: 273.6px;
+        height: 264px;
+        margin-top: 10px;
+    }
+    .swiper {
+        width: 273.6px;
+        height: 264px;
+        margin-top: 10px;
+    }
+    .sub-container {
+        width: 273.6px;
+        height: 88px;
+    }
+    .name {
+        font-size: x-large;
+    }
+    .family {
+        font-size: large;
+    }
+    .arrow-right, .arrow-left {
+        width: 22.23px;
+        height: 39.67px;
+        margin-inline: 10px;
+    }
+    .btn-svg {
+        width: 40px;
+    }
+    .con3 {
+        gap: 400px;
+    }
+}
+
+@media only screen and (max-width: 380px), only screen and (max-height: 570px) {
+    .container {
+        height: 340px;
+        width: 240px;
+    }
+    #animation-card-container {
+        height: 340px;
+        width: 240px;
+    }
+    .correct-circle {
+        width: 122px;
+    }
+    .incorrect-circle {
+        width: 120px;
+    }
+
+    img {
+        width: 220px;
+        height: 220px;
+    }
+    .arrow-con {
+        width: 220px;
+        height: 220px;
+        margin-top: 7.5px;
+    }
+    .swiper {
+        width: 220px;
+        height: 220px;
+        margin-top: 7.5px;
+    }
+    .sub-container {
+        width: 220px;
+        height: 80px;
+    }
+    .name {
+        font-size: large;
+    }
+    .family {
+        font-size: medium;
+    }
+    #flashcard {
+        gap: 15px;
+    }
+    .con2 {
+        height: calc(100% + 27.5px);
+    }
+}
+
+.supportBtn {
+    display: none;
+    width: 150px;
+    height: 40px;
+    background-color: transparent;
+    z-index: 100;
+    border-radius: 10px;
+    position: absolute;
+    right: 50%;
+    transform: translate(50%);
+    margin-top: 12.5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .con3 {
+        gap: 200px;
+        align-items: flex-start;
+        height: 70px;
+        z-index: 10 !important;
+    }
+    .supportBtn {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) and (max-height: 800px) {
+    .btn-svg {
+        width: 30px;
+        margin-top: 15px;
+    }
+    .supportBtn {
+        height: 60px;
+    }
+}
+@media only screen and (max-width: 600px) and (max-height: 700px) {
+    .btn-svg {
+        width: 25px;
+        margin-top: 8px;
+    }
+}
+
+@media only screen and (max-height: 700px) {
+    .counter {
+        height: 30px;
+        width: 60px;
+        font-size: 20px;
+    }
 }

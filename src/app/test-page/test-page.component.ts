@@ -253,6 +253,10 @@ export class TestPageComponent implements OnInit {
     }, 1500);
   }
 
+  supportHomeBtn() {
+    this.router.navigate(['/home']);
+  }
+
   ngOnInit() {
     this.shared.changeStatus();
 

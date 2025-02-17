@@ -1,6 +1,7 @@
+<div class="supportBtn" (click)="supportHomeBtn()"></div>
 <div class="con2">
-    <svg style="width: 75px;" (click)="nextResults()" [ngStyle]="{'display': isFinished ? 'block' : 'none'}" [@fading]="switchBtnState" class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
-    <svg style="width: 75px;" class="btn-svg placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg (click)="nextResults()" [ngStyle]="{'display': isFinished ? 'block' : 'none'}" [@fading]="switchBtnState" class="btn-svg" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
+    <svg class="btn-svg placeholder" xmlns="http://www.w3.org/2000/svg" viewBox="300 -849 400 800"><path d="m361-120-31-31 289-289-289-289 31-31 320 320L361-120Z"/></svg>
 </div>
 <div class="con">
     <div class="resultsCon" [@expandCollapse]="conAnimState" [ngStyle]="{'display': hidden ? 'flex' : 'none'}">

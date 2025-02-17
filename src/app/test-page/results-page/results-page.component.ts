@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { NgStyle, isPlatformBrowser } from '@angular/common';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { SharedService } from '../../shared/shared.service';
+import { Router } from '@angular/router';
 
 export interface Plant {
   name: string;
@@ -38,13 +39,17 @@ export interface Families {
   ],
 })
 export class ResultsPageComponent implements OnInit {
-  constructor(private shared: SharedService, @Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private shared: SharedService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
 
   families: Families = {};
   chosenFamilies: string[] = [];
   correctPlants: Plant[] = [];
   incorrectPlants: Plant[] = [];
   incorrectFamilies: string[] = [];
+
+  supportHomeBtn() {
+    this.router.navigate(['/home']);
+  }
 
   calculatePercentage(part: number, total: number): number {
     if (total === 0) return 0;
